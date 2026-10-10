@@ -1,0 +1,838 @@
+/* =====================================================
+   BASANTA DRY CLEANLINESS
+   admin.css — COMPLETE ADMIN DESIGN (WITH IMAGE GALLERY)
+===================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f5f7f6;
+  color: #18221f;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.admin-header {
+  width: 100%;
+  min-height: 76px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e9e6;
+  display: flex;
+  align-items: center;
+  padding: 14px 32px;
+  gap: 25px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+}
+
+.brand-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #176b52;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.brand strong {
+  display: block;
+  font-size: 17px;
+  letter-spacing: 1.5px;
+  color: #173c31;
+}
+
+.brand span {
+  display: block;
+  margin-top: 2px;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  color: #7b8984;
+}
+
+.admin-title {
+  flex: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #25332e;
+}
+
+.refresh-btn {
+  border: none;
+  background: #176b52;
+  color: #ffffff;
+  padding: 11px 17px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: #125640;
+  transform: translateY(-1px);
+}
+
+.refresh-btn:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.admin-container {
+  width: min(1250px, calc(100% - 40px));
+  margin: 30px auto 60px;
+}
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border: 1px solid #e4e9e6;
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 5px 20px rgba(20, 45, 35, 0.04);
+}
+
+.stat-card > span {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: #edf6f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.stat-card small {
+  display: block;
+  color: #7b8984;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.stat-card strong {
+  display: block;
+  color: #173c31;
+  font-size: 25px;
+}
+
+
+/* =====================================================
+   ORDERS SECTION
+===================================================== */
+
+.orders-section {
+  background: #ffffff;
+  border: 1px solid #e4e9e6;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 30px rgba(20, 45, 35, 0.05);
+}
+
+.section-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #edf0ee;
+  margin-bottom: 22px;
+}
+
+.label {
+  display: block;
+  color: #176b52;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  margin-bottom: 7px;
+}
+
+.section-top h1 {
+  font-size: 27px;
+  color: #173c31;
+  margin-bottom: 5px;
+}
+
+.section-top p {
+  color: #7a8782;
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+#statusFilter {
+  min-width: 170px;
+  padding: 11px 13px;
+  border: 1px solid #d8e1dd;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #263630;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+#statusFilter:focus {
+  border-color: #176b52;
+  box-shadow: 0 0 0 3px rgba(23, 107, 82, 0.1);
+}
+
+
+/* =====================================================
+   ORDERS CONTAINER
+===================================================== */
+
+.orders-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+.loading {
+  padding: 45px 20px;
+  text-align: center;
+  color: #78857f;
+  font-size: 15px;
+}
+
+
+/* =====================================================
+   ORDER CARD
+===================================================== */
+
+.admin-order-card {
+  border: 1px solid #e3e9e6;
+  border-radius: 16px;
+  padding: 20px;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+
+.admin-order-card:hover {
+  border-color: #bfd8ce;
+  box-shadow: 0 7px 22px rgba(20, 55, 42, 0.07);
+  transform: translateY(-1px);
+}
+
+.order-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.order-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 800;
+  color: #8a9691;
+  letter-spacing: 1.3px;
+  margin-bottom: 4px;
+}
+
+.order-card-top h3 {
+  font-size: 21px;
+  color: #173c31;
+}
+
+
+/* =====================================================
+   STATUS BADGES
+===================================================== */
+
+.order-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.status-pending {
+  background: #fff4d8;
+  color: #9a6800;
+}
+
+.status-confirmed {
+  background: #e8f1ff;
+  color: #245d9c;
+}
+
+.status-picked_up {
+  background: #e8f4ff;
+  color: #17648f;
+}
+
+.status-cleaning {
+  background: #eeeaff;
+  color: #6548a8;
+}
+
+.status-ready {
+  background: #e8f8ed;
+  color: #287448;
+}
+
+.status-out_for_delivery {
+  background: #eaf5ff;
+  color: #17639a;
+}
+
+.status-delivered {
+  background: #ddf5e8;
+  color: #176b52;
+}
+
+.status-cancelled {
+  background: #ffe8e6;
+  color: #a7352c;
+}
+
+
+/* =====================================================
+   ORDER INFO
+===================================================== */
+
+.order-card-info {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  padding: 16px 0;
+  border-top: 1px solid #f0f2f1;
+  border-bottom: 1px solid #f0f2f1;
+}
+
+.order-card-info > div {
+  min-width: 0;
+}
+
+.order-card-info small {
+  display: block;
+  color: #8a9691;
+  font-size: 11px;
+  margin-bottom: 5px;
+}
+
+.order-card-info strong {
+  display: block;
+  color: #263630;
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   CARD BOTTOM
+===================================================== */
+
+.order-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding-top: 16px;
+}
+
+.order-card-bottom > span {
+  color: #5d6c66;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.manage-order-btn {
+  border: none;
+  background: #173c31;
+  color: #ffffff;
+  border-radius: 9px;
+  padding: 10px 15px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.manage-order-btn:hover {
+  background: #176b52;
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 1000;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 25, 20, 0.55);
+  backdrop-filter: blur(4px);
+}
+
+.modal-box {
+  position: relative;
+  z-index: 2;
+  width: min(560px, 100%);
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+}
+
+
+/* =====================================================
+   CLOSE
+===================================================== */
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #f1f4f2;
+  color: #52615b;
+  font-size: 23px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background: #e5ebe8;
+}
+
+
+/* =====================================================
+   MODAL TITLE
+===================================================== */
+
+.modal-box h2 {
+  color: #173c31;
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   MODAL DETAILS
+===================================================== */
+
+.modal-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #e5ebe8;
+  border-radius: 13px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 13px 15px;
+  border-bottom: 1px solid #edf0ee;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row span {
+  color: #7a8782;
+  font-size: 13px;
+}
+
+.detail-row strong {
+  color: #273730;
+  font-size: 13px;
+  text-align: right;
+  max-width: 65%;
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   CLOTH IMAGES GALLERY (NEW)
+===================================================== */
+
+#modalClothImagesBox {
+  max-height: 340px;
+  overflow-y: auto;
+}
+
+#modalClothImagesBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+#modalClothImagesBox::-webkit-scrollbar-track {
+  background: #f1f4f2;
+  border-radius: 6px;
+}
+
+#modalClothImagesBox::-webkit-scrollbar-thumb {
+  background: #b9c8c1;
+  border-radius: 6px;
+}
+
+#modalClothImagesBox::-webkit-scrollbar-thumb:hover {
+  background: #176b52;
+}
+
+#clothImagesGallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+#clothImagesGallery > div {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#clothImagesGallery > div:hover {
+  transform: scale(1.03);
+}
+
+#clothImagesGallery img {
+  transition: transform 0.2s ease;
+}
+
+#clothImagesGallery img:hover {
+  transform: scale(1.05);
+}
+
+
+/* =====================================================
+   STATUS CONTROL
+===================================================== */
+
+.status-control {
+  padding-top: 4px;
+}
+
+.status-control label {
+  display: block;
+  color: #34443d;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+#statusSelect {
+  width: 100%;
+  padding: 12px 13px;
+  border: 1px solid #d6dfdb;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #273730;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+#statusSelect:focus {
+  border-color: #176b52;
+  box-shadow: 0 0 0 3px rgba(23, 107, 82, 0.1);
+}
+
+.update-btn {
+  width: 100%;
+  border: none;
+  background: #176b52;
+  color: #ffffff;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.update-btn:hover {
+  background: #125640;
+}
+
+.update-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+#updateMessage {
+  min-height: 20px;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .order-card-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .admin-header {
+    padding: 12px 15px;
+    min-height: 65px;
+    gap: 10px;
+  }
+
+  .brand {
+    min-width: auto;
+  }
+
+  .brand-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 19px;
+  }
+
+  .brand strong {
+    font-size: 14px;
+  }
+
+  .brand span {
+    font-size: 7px;
+  }
+
+  .admin-title {
+    display: none;
+  }
+
+  .refresh-btn {
+    margin-left: auto;
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .admin-container {
+    width: calc(100% - 24px);
+    margin: 18px auto 40px;
+  }
+
+  .stats {
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .stat-card {
+    padding: 14px;
+    border-radius: 13px;
+    gap: 10px;
+  }
+
+  .stat-card > span {
+    width: 38px;
+    height: 38px;
+    font-size: 17px;
+  }
+
+  .stat-card small {
+    font-size: 10px;
+  }
+
+  .stat-card strong {
+    font-size: 20px;
+  }
+
+  .orders-section {
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .section-top {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .section-top h1 {
+    font-size: 23px;
+  }
+
+  #statusFilter {
+    width: 100%;
+  }
+
+  .admin-order-card {
+    padding: 15px;
+    border-radius: 13px;
+  }
+
+  .order-card-top {
+    margin-bottom: 14px;
+  }
+
+  .order-card-top h3 {
+    font-size: 18px;
+  }
+
+  .order-status {
+    padding: 6px 9px;
+    font-size: 10px;
+  }
+
+  .order-card-info {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px 10px;
+    padding: 14px 0;
+  }
+
+  .order-card-bottom {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .manage-order-btn {
+    width: 100%;
+    padding: 11px;
+  }
+
+  .modal {
+    padding: 12px;
+  }
+
+  .modal-box {
+    padding: 22px 17px;
+    border-radius: 17px;
+    max-height: calc(100vh - 24px);
+  }
+
+  .modal-box h2 {
+    font-size: 21px;
+    padding-right: 35px;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px;
+  }
+
+  .detail-row strong {
+    max-width: 100%;
+    text-align: left;
+    word-break: break-word;
+  }
+
+  /* CLOTH IMAGES MOBILE */
+  #modalClothImagesBox {
+    max-height: 260px;
+  }
+
+  #clothImagesGallery {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+}
+
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  #clothImagesGallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}

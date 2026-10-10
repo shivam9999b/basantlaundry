@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Article | Basanta Dry Cleanliness</title>
+<meta name="description" content="Basanta Dry Cleanliness article">
+<link rel="stylesheet" href="style.css">
+<style>
+.article-detail-page{min-height:70vh;padding:60px 20px}
+.article-detail{max-width:850px;margin:auto}
+.article-detail-image{width:100%;max-height:480px;object-fit:cover;border-radius:18px;margin:25px 0}
+.article-detail-category{display:inline-block;margin-bottom:10px;font-size:14px;font-weight:700;color:#176b52}
+.article-detail h1{font-size:clamp(30px,5vw,48px);line-height:1.2;margin:0 0 15px}
+.article-detail-meta{color:#777;margin-bottom:25px}
+.article-detail-content{font-size:18px;line-height:1.9;color:#333}
+.article-detail-content p{margin:0 0 20px}
+.article-back{display:inline-block;margin-bottom:25px;color:#176b52;text-decoration:none;font-weight:700}
+.article-loading,.article-error{text-align:center;padding:50px 20px}
+</style>
+</head>
+<body>
+
+<header class="header">
+<div class="container header-inner">
+<a href="index.html" class="logo">
+<div class="logo-icon">B</div>
+<div class="logo-text"><strong>BASANTA</strong><span>DRY CLEANLINESS</span></div>
+</a>
+<nav class="desktop-nav">
+<a href="index.html#home">Home</a>
+<a href="index.html#services">Services</a>
+<a href="index.html#articles">Articles</a>
+<a href="index.html#reviews">Reviews</a>
+<a href="index.html#pricing">Pricing</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<div class="header-actions">
+<a href="track.html" class="track-order-btn">📦 <span class="track-text">Track Order</span></a>
+<a href="index.html" class="primary-btn">Home</a>
+</div>
+</div>
+</header>
+
+<main class="article-detail-page">
+<div class="article-detail">
+<a href="index.html#articles" class="article-back">← Back to Articles</a>
+
+<div id="articleLoading" class="article-loading">Article loading...</div>
+
+<article id="articleContent" hidden>
+<span id="articleCategory" class="article-detail-category"></span>
+<h1 id="articleTitle"></h1>
+<div id="articleMeta" class="article-detail-meta"></div>
+<img id="articleImage" class="article-detail-image" alt="" hidden>
+<div id="articleBody" class="article-detail-content"></div>
+</article>
+
+<div id="articleError" class="article-error" hidden>
+Article नहीं मिला।<br><br>
+<a href="index.html#articles">← वापस Articles पर जाएँ</a>
+</div>
+</div>
+</main>
+
+<footer class="footer">
+<div class="container footer-bottom">
+<span>© 2026 Basanta Dry Cleanliness</span>
+<span>Clean • Fresh • Ready</span>
+</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/*
+  IMPORTANT:
+  यहाँ वही Supabase URL और Publishable/Anon Key डालें
+  जो आपके app.js में इस्तेमाल हो रही है.
+*/
+const SUPABASE_URL = "https://ubsyhqkefhtskxjpjzbf.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVic3locWtlZmh0c2t4anBqemJmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4Mzk4NjQsImV4cCI6MjEwNTQxNTg2NH0.00-JsYNjdmb7OV51Tly1W8A9grQ9GR9E66E3Yyas-j8";
+
+let supabaseClient = null;
+
+if (SUPABASE_URL && SUPABASE_KEY &&
+    !SUPABASE_URL.includes("YOUR_") &&
+    !SUPABASE_KEY.includes("YOUR_")) {
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+}
+
+function escapeHtml(value){
+  return String(value || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function formatContent(text){
+  if(!text) return "";
+  return String(text).split(/\n\s*\n/)
+    .map(p => {
+      const clean=p.trim();
+      if(!clean) return "";
+      return "<p>"+escapeHtml(clean).replace(/\n/g,"<br>")+"</p>";
+    }).join("");
+}
+
+function formatDate(value){
+  if(!value) return "";
+  const d=new Date(value);
+  if(Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("hi-IN",{
+    day:"numeric",month:"long",year:"numeric"
+  });
+}
+
+async function loadArticle(){
+  const loading=document.getElementById("articleLoading");
+  const article=document.getElementById("articleContent");
+  const error=document.getElementById("articleError");
+
+  if(!supabaseClient){
+    loading.hidden=true;
+    error.hidden=false;
+    error.innerHTML="Supabase configuration missing.<br><br><a href='index.html#articles'>← Back to Articles</a>";
+    return;
+  }
+
+  const id=new URLSearchParams(window.location.search).get("id");
+
+  if(!id){
+    loading.hidden=true;
+    error.hidden=false;
+    return;
+  }
+
+  try{
+    const {data,error:dbError}=await supabaseClient
+      .from("articles")
+      .select("id,title,slug,category,description,image_url,content,author,published,created_at")
+      .eq("id",id)
+      .eq("published",true)
+      .maybeSingle();
+
+    if(dbError) throw dbError;
+
+    if(!data){
+      loading.hidden=true;
+      error.hidden=false;
+      return;
+    }
+
+    document.title=(data.title || "Article")+" | Basanta Dry Cleanliness";
+    document.getElementById("articleCategory").textContent=data.category || "Cleaning & Care";
+    document.getElementById("articleTitle").textContent=data.title || "Article";
+    document.getElementById("articleMeta").textContent="By "+(data.author || "Basanta")+" • "+formatDate(data.created_at);
+
+    const image=document.getElementById("articleImage");
+    if(data.image_url){
+      image.src=data.image_url;
+      image.alt=data.title || "Article image";
+      image.hidden=false;
+    }
+
+    document.getElementById("articleBody").innerHTML=formatContent(data.content);
+
+    loading.hidden=true;
+    article.hidden=false;
+  }catch(err){
+    console.error("Article load error:",err);
+    loading.hidden=true;
+    error.hidden=false;
+  }
+}
+
+document.addEventListener("DOMContentLoaded",loadArticle);
+</script>
+</body>
+</html>

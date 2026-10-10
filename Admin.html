@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Admin | Basanta Dry Cleanliness</title>
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<header class="admin-header">
+
+  <div class="brand">
+    <div class="brand-icon">B</div>
+
+    <div>
+      <strong>BASANTA</strong>
+      <span>DRY CLEANLINESS</span>
+    </div>
+  </div>
+
+  <div class="admin-title">
+    Admin Dashboard
+  </div>
+
+  <button id="refreshBtn" class="refresh-btn">
+    ↻ Refresh
+  </button>
+
+</header>
+
+
+<main class="admin-container">
+
+  <!-- DASHBOARD STATS -->
+
+  <section class="stats">
+
+    <div class="stat-card">
+      <span>📦</span>
+      <div>
+        <small>Total Orders</small>
+        <strong id="totalOrders">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <span>⏳</span>
+      <div>
+        <small>Pending</small>
+        <strong id="pendingOrders">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <span>🚚</span>
+      <div>
+        <small>Pickup</small>
+        <strong id="pickupOrders">0</strong>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <span>✓</span>
+      <div>
+        <small>Delivered</small>
+        <strong id="deliveredOrders">0</strong>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ORDERS -->
+
+  <section class="orders-section">
+
+    <div class="section-top">
+
+      <div>
+        <span class="label">
+          ORDER MANAGEMENT
+        </span>
+
+        <h1>
+          Pickup Orders
+        </h1>
+
+        <p>
+          Customer pickup requests manage करें।
+        </p>
+      </div>
+
+
+      <select id="statusFilter">
+
+        <option value="all">All Orders</option>
+        <option value="pending">Pending</option>
+        <option value="pickup">Pickup</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="pressing">Pressing</option>
+        <option value="ready">Ready</option>
+        <option value="delivered">Delivered</option>
+
+      </select>
+
+    </div>
+
+
+    <div
+      id="ordersContainer"
+      class="orders-container"
+    >
+
+      <div class="loading">
+        Orders loading...
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =====================================================
+     ORDER DETAILS MODAL
+===================================================== -->
+
+<div id="orderModal" class="modal">
+
+  <div class="modal-overlay"></div>
+
+  <div class="modal-box">
+
+    <button id="closeModal" class="close-btn">
+      ×
+    </button>
+
+    <span class="label">
+      ORDER DETAILS
+    </span>
+
+    <h2 id="modalOrderId">
+      Order
+    </h2>
+
+
+    <div id="modalDetails" class="modal-details"></div>
+
+
+    <!-- CLOTH DETAILS / DESCRIPTION FIELD -->
+
+    <div
+      id="modalClothDetails"
+      class="cloth-details-box"
+      style="margin-top: 15px; padding: 12px; background-color: #f8f9fa; border-radius: 6px; border: 1px dashed #ccc;"
+    >
+      <small style="color: #666; font-weight: bold; display: block; margin-bottom: 4px;">
+        CLOTH DETAILS / DESCRIPTION
+      </small>
+      <p id="clothDescriptionText" style="margin: 0; color: #333; font-size: 14px;">
+        Loading...
+      </p>
+    </div>
+
+
+    <!-- =====================================================
+         CLOTH IMAGES GALLERY
+    ===================================================== -->
+
+    <div
+      id="modalClothImagesBox"
+      class="cloth-images-box"
+      style="margin-top: 15px; padding: 12px; background-color: #f8f9fa; border-radius: 6px; border: 1px dashed #ccc; display: none;"
+    >
+      <small style="color: #666; font-weight: bold; display: block; margin-bottom: 8px;">
+        CUSTOMER CLOTH IMAGES
+      </small>
+
+      <div
+        id="clothImagesGallery"
+        style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;"
+      ></div>
+    </div>
+
+
+    <div class="status-control" style="margin-top: 20px;">
+
+      <label>
+        Update Order Status
+      </label>
+
+      <select id="statusSelect">
+
+        <option value="pending">Pending</option>
+        <option value="pickup">Pickup</option>
+        <option value="cleaning">Cleaning</option>
+        <option value="pressing">Pressing</option>
+        <option value="ready">Ready</option>
+        <option value="delivered">Delivered</option>
+
+      </select>
+
+
+      <button
+        id="updateStatusBtn"
+        class="update-btn"
+      >
+        Update Status
+      </button>
+
+      <p id="updateMessage"></p>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

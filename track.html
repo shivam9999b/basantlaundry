@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Track Order | Basanta Dry Cleanliness</title>
+
+  <link
+    rel="stylesheet"
+    href="track.css">
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header class="track-header">
+
+  <a
+    href="index.html"
+    class="logo"
+  >
+
+    <span class="logo-mark">
+      B
+    </span>
+
+    <span>
+      <strong>BASANTA</strong>
+      <small>DRY CLEANLINESS</small>
+    </span>
+
+  </a>
+
+
+  <a
+    href="index.html"
+    class="home-btn"
+  >
+    Home
+  </a>
+
+</header>
+
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="track-page">
+
+
+  <section class="track-card">
+
+
+    <div class="track-icon">
+      📦
+    </div>
+
+
+    <span class="eyebrow">
+      ORDER TRACKING
+    </span>
+
+
+    <h1>
+      Track Your Order
+    </h1>
+
+
+    <p class="intro">
+      अपना Order ID डालकर अपने कपड़ों का
+      current status देखें।
+    </p>
+
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <form id="trackForm">
+
+      <label for="orderId">
+        Order ID
+      </label>
+
+
+      <div class="search-box">
+
+        <input
+          type="text"
+          id="orderId"
+          placeholder="जैसे BC-0001"
+          autocomplete="off"
+          required
+        >
+
+        <button
+          type="submit"
+          id="trackBtn"
+        >
+          Track
+        </button>
+
+      </div>
+
+    </form>
+
+
+    <div
+      id="trackMessage"
+      class="track-message"
+    ></div>
+
+
+
+    <!-- ================= RESULT ================= -->
+
+    <section
+      id="orderResult"
+      class="order-result"
+      hidden
+    >
+
+      <div class="result-top">
+
+        <div>
+
+          <small>
+            ORDER
+          </small>
+
+          <h2 id="resultOrderId">
+            #BC-0001
+          </h2>
+
+        </div>
+
+
+        <span
+          id="resultStatus"
+          class="status"
+        >
+          Pending
+        </span>
+
+      </div>
+
+
+
+      <!-- ================= CUSTOMER ================= -->
+
+      <div class="customer-box">
+
+        <div>
+
+          <small>
+            Customer
+          </small>
+
+          <strong id="customerName">
+            -
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Pickup Date
+          </small>
+
+          <strong id="pickupDate">
+            -
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Pickup Time
+          </small>
+
+          <strong id="pickupTime">
+            -
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ================= TRACKING ================= -->
+
+      <div class="timeline">
+
+
+        <div
+          class="timeline-item"
+          data-status="pending"
+        >
+
+          <div class="timeline-dot">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Order Received
+            </strong>
+
+            <p>
+              आपका order receive हो गया।
+            </p>
+          </div>
+
+        </div>
+
+
+
+        <div
+          class="timeline-item"
+          data-status="pickup"
+        >
+
+          <div class="timeline-dot">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Pickup
+            </strong>
+
+            <p>
+              कपड़े pickup के लिए तैयार हैं।
+            </p>
+          </div>
+
+        </div>
+
+
+
+        <div
+          class="timeline-item"
+          data-status="cleaning"
+        >
+
+          <div class="timeline-dot">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Cleaning
+            </strong>
+
+            <p>
+              आपके कपड़ों की cleaning चल रही है।
+            </p>
+          </div>
+
+        </div>
+
+
+
+        <div
+          class="timeline-item"
+          data-status="pressing"
+        >
+
+          <div class="timeline-dot">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Pressing
+            </strong>
+
+            <p>
+              कपड़ों की finishing और pressing हो रही है।
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div
+          class="timeline-item"
+          data-status="ready"
+        >
+
+          <div class="timeline-dot">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Ready
+            </strong>
+
+            <p>
+              आपका order delivery के लिए ready है।
+            </p>
+
+          </div>
+
+        </div>
+
+
+
+        <div
+          class="timeline-item"
+          data-status="delivered"
+        >
+
+          <div class="timeline-dot">
+            ✓
+          </div>
+
+          <div>
+            <strong>
+              Delivered
+            </strong>
+
+            <p>
+              आपका order successfully delivered हो गया।
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+  </section>
+
+
+</main>
+
+
+
+<!-- ================= SUPABASE ================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="track.js"></script>
+
+
+</body>
+
+</html>

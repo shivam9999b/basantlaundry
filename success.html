@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Order Confirmed | Basanta Dry Cleanliness</title>
+
+  <link rel="stylesheet" href="success.css">
+</head>
+
+<body>
+
+  <main class="success-page">
+
+    <section class="success-card">
+
+      <div class="success-icon">
+        ✓
+      </div>
+
+      <span class="success-label">
+        BOOKING CONFIRMED
+      </span>
+
+      <h1>
+        आपका Order Confirm हो गया!
+      </h1>
+
+      <p>
+        आपके कपड़ों की pickup booking successfully
+        receive हो गई है।
+      </p>
+
+
+      <div class="order-box">
+
+        <small>
+          YOUR ORDER ID
+        </small>
+
+        <strong id="orderId">
+          #BC-0000
+        </strong>
+
+        <button
+          id="copyOrderBtn"
+          type="button"
+        >
+          Copy Order ID
+        </button>
+
+      </div>
+
+
+      <div class="success-actions">
+
+        <a
+          href="track.html"
+          class="primary-btn"
+        >
+          📦 Track Order
+        </a>
+
+        <a
+          href="index.html"
+          class="secondary-btn"
+        >
+          Back to Home
+        </a>
+
+      </div>
+
+
+      <div
+        id="copyMessage"
+        class="copy-message"
+      ></div>
+
+    </section>
+
+  </main>
+  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="success.js"></script>
+
+</body>
+
+</html>

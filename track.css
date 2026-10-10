@@ -1,0 +1,704 @@
+/* =====================================================
+   BASANTA DRY CLEANLINESS
+   TRACK ORDER PAGE — UPDATED WITH RECENT ORDERS
+===================================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --green: #176b52;
+  --green-dark: #10523f;
+  --green-light: #eaf5f0;
+  --text: #17221e;
+  --muted: #78847f;
+  --border: #e1e9e5;
+  --bg: #f5f8f6;
+  --white: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.track-header {
+  width: 100%;
+  height: 78px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 38px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.logo strong {
+  display: block;
+  color: #183c31;
+  font-size: 17px;
+  letter-spacing: 1.2px;
+}
+
+.logo small {
+  display: block;
+  color: #8a9590;
+  font-size: 8px;
+  letter-spacing: 2px;
+  margin-top: 3px;
+}
+
+
+/* =====================================================
+   HOME BUTTON
+===================================================== */
+
+.home-btn {
+  text-decoration: none;
+  color: var(--green);
+  background: white;
+  border: 1px solid #d5e2dc;
+  border-radius: 10px;
+  padding: 11px 19px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: .2s ease;
+}
+
+.home-btn:hover {
+  background: var(--green-light);
+  border-color: #bdd7cc;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.track-page {
+  width: min(900px, calc(100% - 30px));
+  margin: 50px auto 80px;
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.track-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 15px 50px rgba(24, 65, 50, .07);
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.track-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background: var(--green-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  margin-bottom: 30px;
+}
+
+
+/* =====================================================
+   EYEBROW
+===================================================== */
+
+.eyebrow {
+  display: block;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   HEADING
+===================================================== */
+
+.track-card h1 {
+  color: #15251f;
+  font-size: 46px;
+  line-height: 1.1;
+  font-weight: 800;
+  margin-bottom: 13px;
+}
+
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.intro {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  max-width: 650px;
+}
+
+
+/* =====================================================
+   FORM LABEL
+===================================================== */
+
+#trackForm label {
+  display: block;
+  color: #3f4c47;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+
+/* =====================================================
+   SEARCH BOX
+===================================================== */
+
+.search-box {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+#orderId {
+  flex: 1;
+  min-width: 0;
+  height: 56px;
+  border: 1px solid #d5e0db;
+  border-radius: 13px;
+  padding: 0 17px;
+  outline: none;
+  background: #fbfcfb;
+  color: #1d2a25;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: .2s ease;
+}
+
+#orderId::placeholder {
+  color: #a1aba7;
+  text-transform: none;
+  font-weight: 400;
+}
+
+#orderId:focus {
+  background: white;
+  border-color: var(--green);
+  box-shadow: 0 0 0 4px rgba(23, 107, 82, .09);
+}
+
+
+/* =====================================================
+   TRACK BUTTON
+===================================================== */
+
+#trackBtn {
+  height: 56px;
+  min-width: 135px;
+  border: none;
+  border-radius: 13px;
+  background: var(--green);
+  color: white;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 0 25px;
+  transition: .2s ease;
+  box-shadow: 0 7px 18px rgba(23, 107, 82, .17);
+}
+
+#trackBtn:hover {
+  background: var(--green-dark);
+  transform: translateY(-1px);
+}
+
+#trackBtn:active {
+  transform: translateY(0);
+}
+
+#trackBtn:disabled {
+  opacity: .65;
+  cursor: wait;
+  transform: none;
+}
+
+
+/* =====================================================
+   RECENT ORDERS / SEARCH CHIPS (NEW)
+===================================================== */
+
+.recent-orders-box {
+  margin-top: 14px;
+}
+
+.recent-orders-box small {
+  display: block;
+  color: #78847f;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.recent-buttons-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.recent-order-btn {
+  background: var(--green-light);
+  border: 1px solid #c8e2d7;
+  color: var(--green-dark);
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s ease;
+  letter-spacing: .5px;
+}
+
+.recent-order-btn:hover {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+  transform: translateY(-1px);
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.track-message {
+  min-height: 23px;
+  margin-top: 13px;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+.order-result {
+  margin-top: 30px;
+  border-top: 1px solid #e8eeeb;
+  padding-top: 30px;
+  animation: resultShow .3s ease;
+}
+
+.order-result[hidden] {
+  display: none;
+}
+
+@keyframes resultShow {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =====================================================
+   RESULT TOP
+===================================================== */
+
+.result-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.result-top small {
+  display: block;
+  color: #89958f;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.7px;
+  margin-bottom: 5px;
+}
+
+.result-top h2 {
+  color: #173c31;
+  font-size: 27px;
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 15px;
+  border-radius: 999px;
+  background: #fff3d5;
+  color: #936500;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+
+/* =====================================================
+   CUSTOMER BOX
+===================================================== */
+
+.customer-box {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.customer-box > div {
+  background: #f8faf9;
+  border: 1px solid #e6eeea;
+  border-radius: 13px;
+  padding: 15px;
+}
+
+.customer-box small {
+  display: block;
+  color: #8a9691;
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+
+.customer-box strong {
+  display: block;
+  color: #293a33;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+
+/* =====================================================
+   TIMELINE
+===================================================== */
+
+.timeline {
+  position: relative;
+  padding-left: 8px;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: #e0e9e4;
+}
+
+
+/* =====================================================
+   TIMELINE ITEM
+===================================================== */
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  gap: 18px;
+  padding-bottom: 26px;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+
+/* =====================================================
+   TIMELINE DOT
+===================================================== */
+
+.timeline-dot {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #eef2f0;
+  color: #929d98;
+  border: 3px solid white;
+  box-shadow: 0 0 0 1px #dce5e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+
+/* =====================================================
+   TIMELINE TEXT
+===================================================== */
+
+.timeline-item strong {
+  display: block;
+  color: #34433d;
+  font-size: 14px;
+  margin-top: 5px;
+  margin-bottom: 4px;
+}
+
+.timeline-item p {
+  color: #89958f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   ACTIVE TIMELINE
+===================================================== */
+
+.timeline-item.active .timeline-dot {
+  background: var(--green);
+  color: white;
+  box-shadow: 0 0 0 1px var(--green), 0 5px 14px rgba(23, 107, 82, .18);
+}
+
+.timeline-item.active strong {
+  color: var(--green);
+}
+
+.timeline-item.completed .timeline-dot {
+  background: #dff2e8;
+  color: var(--green);
+  box-shadow: 0 0 0 1px #c7e4d7;
+}
+
+.timeline-item.completed strong {
+  color: #176b52;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+  .track-header {
+    height: 68px;
+    padding: 0 15px;
+  }
+
+  .logo-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    font-size: 18px;
+  }
+
+  .logo strong {
+    font-size: 14px;
+  }
+
+  .logo small {
+    font-size: 6.5px;
+    letter-spacing: 1.5px;
+  }
+
+  .home-btn {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .track-page {
+    width: calc(100% - 20px);
+    margin: 25px auto 50px;
+  }
+
+  .track-card {
+    padding: 22px;
+    border-radius: 18px;
+  }
+
+  .track-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 19px;
+    font-size: 31px;
+    margin-bottom: 23px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.7px;
+  }
+
+  .track-card h1 {
+    font-size: 32px;
+    line-height: 1.15;
+  }
+
+  .intro {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 24px;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  #orderId {
+    width: 100%;
+    height: 53px;
+  }
+
+  #trackBtn {
+    width: 100%;
+    height: 53px;
+  }
+
+  .recent-buttons-group {
+    gap: 6px;
+  }
+
+  .recent-order-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+
+  .result-top {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .result-top h2 {
+    font-size: 23px;
+  }
+
+  .status {
+    font-size: 10px;
+    padding: 8px 12px;
+  }
+
+  .customer-box {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .timeline {
+    padding-left: 0;
+  }
+
+  .timeline::before {
+    left: 16px;
+  }
+
+  .timeline-item {
+    gap: 15px;
+    padding-bottom: 23px;
+  }
+
+  .timeline-dot {
+    flex-basis: 32px;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 380px) {
+  .track-card {
+    padding: 18px;
+  }
+
+  .track-card h1 {
+    font-size: 28px;
+  }
+
+  .intro {
+    font-size: 13px;
+  }
+
+  .logo small {
+    display: none;
+  }
+}

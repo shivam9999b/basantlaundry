@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="hi">
 <head>
-  <meta name="google-site-verification" content="_09UWQyxq7awv_2JYOkPoRNeSxsSJ77QpPgmSJ6B3n4" />
-  <link rel="canonical" href="https://basantlaundrys.netlify.app/" />
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8756827525416269"
-     crossorigin="anonymous"></script>
-  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Basanta Dry Cleaning - Best Press & Laundry in Varanasi | Lanka, Sigra, Bhelupur, BHU</title>
@@ -19,6 +14,15 @@
     .review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
     .review-card{background:#fff;border:1px solid #e5ece7;padding:14px;border-radius:12px}
     .upi-box{text-align:center;margin-top:18px;background:#fffbe6;border:1px dashed #d9c44a;padding:10px;border-radius:10px;font-size:14px}
+    .star-rating{display:flex;gap:6px;font-size:32px;cursor:pointer;margin:6px 0 10px}
+    .star-rating .star{color:#ccc;transition:color .15s, transform .15s}
+    .star-rating .star.active{color:#f5b301}
+    .star-rating .star:hover{transform:scale(1.15)}
+    .review-form-box{max-width:520px;margin:24px auto 0;background:#fff;border:1px solid #e5ece7;padding:18px;border-radius:14px}
+    .review-form-box label{display:block;margin-bottom:10px;font-weight:600;font-size:14px}
+    .review-form-box textarea{width:100%;padding:10px;border:1px solid #d6e2dd;border-radius:8px;font-family:inherit;font-size:14px;margin-top:6px}
+    .review-form-box button{background:#176b52;color:#fff;border:0;padding:10px 18px;border-radius:8px;font-weight:700;cursor:pointer;margin-top:6px}
+    #reviewMessage{font-size:13px;margin-top:8px;color:#176b52}
   </style>
 </head>
 <body>
@@ -55,7 +59,6 @@
         <button type="button" class="primary-btn large-btn" id="bookHeroBtn"><span id="heroButtonText">Book a Pickup</span><span>→</span></button>
         <a href="#pricing" class="secondary-btn">View Prices</a>
       </div>
-      <!-- ADDED: Area buttons same design me -->
       <div class="area-bar">
         <a href="#contact">Press in Lanka</a>
         <a href="#contact">Press in Sigra</a>
@@ -107,12 +110,11 @@
       <div class="price-card"><div class="clothing-icon">👕</div><div><h3>T-Shirt</h3><span>Press / Iron</span></div><strong>₹10</strong></div>
       <div class="price-card"><div class="clothing-icon">🧥</div><div><h3>Kurta</h3><span>Press / Iron</span></div><strong>₹15</strong></div>
     </div>
-    <!-- ADDED: UPI BOX same design me -->
     <div class="upi-box">💳 UPI & Cash on Delivery Available | Google Pay / PhonePe Accepted | <b>₹199+ par Free Delivery in Varanasi</b></div>
   </div>
 </section>
 
-<!-- ADDED: Reviews Section - same design language -->
+<!-- REVIEWS + 5-STAR FORM (सिर्फ star + comment) -->
 <section id="reviews" class="section">
   <div class="container">
     <div class="section-heading centered"><span class="section-label">CUSTOMER REVIEWS</span><h2>Varanasi ke log kya keh rahe hain</h2><p>Real reviews from Lanka, Sigra, Bhelupur</p></div>
@@ -121,8 +123,8 @@
       <div class="review-card">⭐⭐⭐⭐⭐<br><strong>Super Fast Delivery</strong><br><small>"Sigra me 2 ghante me de diya. Rs 10 me shirt press."</small><br><small>- Priya, Sigra</small></div>
       <div class="review-card">⭐⭐⭐⭐⭐<br><strong>Trusted Service</strong><br><small>"Bhelupur me sabse sasta aur quality wala."</small><br><small>- Rahul, Bhelupur</small></div>
     </div>
-  </div>
-</section>
+
+   
 
 <section id="how" class="section">
   <div class="container">
@@ -198,11 +200,9 @@
   </div>
 </div>
 
-<!-- WHATSAPP FLOATING BUTTON - same place -->
 <a href="https://wa.me/9569553540?text=Namaste%20Basanta%20Dry%20Cleanliness%2C%20mujhe%20Varanasi%20me%20kapda%20pickup%20karwana%20hai" class="whatsapp-float" target="_blank" aria-label="WhatsApp">💬</a>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
 <script src="app.js"></script>
 </body>
-                                                                                              </html>
+</html>

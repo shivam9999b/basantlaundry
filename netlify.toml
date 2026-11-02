@@ -1,0 +1,4 @@
+
+[build]
+  command = "node generate-sitemap.js"
+  publish = "."

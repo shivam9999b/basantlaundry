@@ -3,10 +3,10 @@ const fs = require("fs");
 const path = require("path");
 
 const SITE_URL = "https://basantlaundrys.netlify.app";
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_KEY = process.env.SUPABASE_ANON_KEY;
 
-// केवल जरूरी Public Pages
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
 const PUBLIC_PAGES = [
   "index.html",
   "About.html",
@@ -17,43 +17,61 @@ const PUBLIC_PAGES = [
   "terms and conditions.html"
 ];
 
-const ARTICLE_PAGE = "article.html";
-
-function escapeXml(value) {
-  return String(value).replace(/[<>&"']/g, char => ({
+function escapeXML(value) {
+  return String(value).replace(/[<>&'"]/g, char => ({
     "<": "&lt;",
     ">": "&gt;",
     "&": "&amp;",
-    '"': "&quot;",
-    "'": "&apos;"
+    "'": "&apos;",
+    '"': "&quot;"
   })[char]);
 }
 
-function getDate(value) {
-  return new Date(value).toISOString().slice(0, 10);
+function formatDate(value) {
+  if (!value) return "";
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) return "";
+
+  return date.toISOString().split("T")[0];
 }
 
 async function getPublishedArticles() {
-  if (!SUPABASE_URL || !SUPABASE_KEY) {
-    throw new Error("Supabase environment variables are missing.");
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    throw new Error("SUPABASE_URL or SUPABASE_ANON_KEY missing");
   }
 
   const articles = [];
+  const pageSize = 500;
   let offset = 0;
-  const limit = 500;
 
   while (true) {
-    const apiUrl = new URL(`${SUPABASE_URL}/rest/v1/articles`);
+    const url = new URL(
+      "/rest/v1/articles",
+      SUPABASE_URL
+    );
 
-    apiUrl.searchParams.set("select", "id,created_at");
-    apiUrl.searchParams.set("published", "eq.true");
-    apiUrl.searchParams.set("order", "created_at.desc");
+    url.searchParams.set(
+      "select",
+      "id,slug,created_at"
+    );
 
-    const response = await fetch(apiUrl, {
+    url.searchParams.set(
+      "published",
+      "eq.true"
+    );
+
+    url.searchParams.set(
+      "order",
+      "created_at.desc"
+    );
+
+    const response = await fetch(url, {
       headers: {
-        apikey: SUPABASE_KEY,
-        Authorization: `Bearer ${SUPABASE_KEY}`,
-        Range: `${offset}-${offset + limit - 1}`
+        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        Range: `${offset}-${offset + pageSize - 1}`
       }
     });
 
@@ -64,69 +82,81 @@ async function getPublishedArticles() {
     }
 
     const batch = await response.json();
+
     articles.push(...batch);
 
-    if (batch.length < limit) break;
+    if (batch.length < pageSize) break;
 
-    offset += limit;
+    offset += pageSize;
   }
 
   return articles;
 }
 
-async function generateSitemap() {
-  const entries = [];
+function makeUrl(loc, lastmod) {
+  return `
+  <url>
+    <loc>${escapeXML(loc)}</loc>
+    ${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}
+  </url>`;
+}
 
-  // Public pages जोड़ें, केवल जब वे वास्तव में मौजूद हों
-  for (const file of PUBLIC_PAGES) {
-    const filePath = path.join(__dirname, file);
+async function generateSitemap() {
+  const urls = [];
+
+  // Public static pages
+  for (const page of PUBLIC_PAGES) {
+    const filePath = path.join(__dirname, page);
 
     if (!fs.existsSync(filePath)) {
-      console.warn(`Public page not found, skipped: ${file}`);
+      console.log("Page not found, skipping:", page);
       continue;
     }
 
-    const pageUrl = new URL(
-      file === "index.html" ? "/" : `/${file}`,
-      SITE_URL
+    const lastmod = formatDate(
+      fs.statSync(filePath).mtime
     );
 
-    entries.push({
-      loc: pageUrl.href,
-      lastmod: getDate(fs.statSync(filePath).mtime)
-    });
+    const pageUrl = page === "index.html"
+      ? `${SITE_URL}/`
+      : `${SITE_URL}/${encodeURIComponent(page).replace(/%2F/g, "/")}`;
+
+    urls.push(makeUrl(pageUrl, lastmod));
   }
 
-  // Article page मौजूद होना जरूरी है
-  if (!fs.existsSync(path.join(__dirname, ARTICLE_PAGE))) {
-    throw new Error(`${ARTICLE_PAGE} was not found.`);
+  // Article page must exist
+  if (!fs.existsSync(path.join(__dirname, "article.html"))) {
+    throw new Error("article.html not found");
   }
 
-  // Supabase से Published Articles लें
+  // Published Supabase articles
   const articles = await getPublishedArticles();
 
   for (const article of articles) {
-    if (article.id === null || article.id === undefined) continue;
+    if (!article.slug || !article.slug.trim()) {
+      console.log("Skipping article without slug:", article.id);
+      continue;
+    }
 
-    const articleUrl = new URL(`/${ARTICLE_PAGE}`, SITE_URL);
-    articleUrl.searchParams.set("id", article.id);
+    const articleUrl = new URL(
+      "/article.html",
+      SITE_URL
+    );
 
-    entries.push({
-      loc: articleUrl.href,
-      lastmod: article.created_at
-        ? getDate(article.created_at)
-        : new Date().toISOString().slice(0, 10)
-    });
+    articleUrl.searchParams.set("slug", article.slug);
+
+    urls.push(
+      makeUrl(
+        articleUrl.toString(),
+        formatDate(article.created_at)
+      )
+    );
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${entries.map(entry => `  <url>
-    <loc>${escapeXml(entry.loc)}</loc>
-    <lastmod>${entry.lastmod}</lastmod>
-  </url>`).join("\n")}
-</urlset>
-`;
+${urls.join("\n")}
+</urlset>`;
 
   fs.writeFileSync(
     path.join(__dirname, "sitemap.xml"),
@@ -135,9 +165,9 @@ ${entries.map(entry => `  <url>
   );
 
   console.log("Sitemap generated successfully!");
-  console.log(`Public pages: ${PUBLIC_PAGES.length}`);
-  console.log(`Published articles: ${articles.length}`);
-  console.log(`Total URLs: ${entries.length}`);
+  console.log("Static pages:", PUBLIC_PAGES.length);
+  console.log("Published articles:", articles.length);
+  console.log("Total sitemap URLs:", urls.length);
 }
 
 generateSitemap().catch(error => {
